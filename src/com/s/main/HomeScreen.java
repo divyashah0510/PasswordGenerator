@@ -78,7 +78,7 @@ public class HomeScreen extends javax.swing.JFrame {
         background1 = new com.s.swing.Background();
         panel = new javax.swing.JPanel();
         txtEmail = new com.s.swing.blur.TextField();
-        button1 = new com.s.swing.blur.Button();
+        cmdGenerate = new com.s.swing.blur.Button();
         txtAns = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -157,12 +157,12 @@ public class HomeScreen extends javax.swing.JFrame {
         txtEmail.setHint("Enter Your Email Here");
         txtEmail.setInheritsPopupMenu(true);
 
-        button1.setForeground(new java.awt.Color(255, 255, 255));
-        button1.setText("Generate");
-        button1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        button1.addActionListener(new java.awt.event.ActionListener() {
+        cmdGenerate.setForeground(new java.awt.Color(255, 255, 255));
+        cmdGenerate.setText("Generate");
+        cmdGenerate.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        cmdGenerate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                button1ActionPerformed(evt);
+                cmdGenerateActionPerformed(evt);
             }
         });
 
@@ -177,7 +177,7 @@ public class HomeScreen extends javax.swing.JFrame {
             panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(button1, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cmdGenerate, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(80, 80, 80))
             .addGroup(panelLayout.createSequentialGroup()
                 .addGap(40, 40, 40)
@@ -192,7 +192,7 @@ public class HomeScreen extends javax.swing.JFrame {
                 .addGap(130, 130, 130)
                 .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30)
-                .addComponent(button1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cmdGenerate, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(53, 53, 53)
                 .addComponent(txtAns, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(109, Short.MAX_VALUE))
@@ -288,14 +288,14 @@ public class HomeScreen extends javax.swing.JFrame {
         setState(JFrame.ICONIFIED);
     }//GEN-LAST:event_cmdMinimizeActionPerformed
 
-    private void button1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button1ActionPerformed
+    private void cmdGenerateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdGenerateActionPerformed
         String email = txtEmail.getText();
         validateAndProcessEmail();
             int phraseLength = 10; // You can change the desired length here
             String randomPhrase = generateRandomPhrase(phraseLength);
             txtAns.setText("Suggested Password: " + randomPhrase);
         
-    }//GEN-LAST:event_button1ActionPerformed
+    }//GEN-LAST:event_cmdGenerateActionPerformed
 
     private int pX;
     private int pY;
@@ -336,8 +336,8 @@ public class HomeScreen extends javax.swing.JFrame {
     private com.s.swing.Background background1;
     private com.s.swing.Panel behind;
     private com.s.swing.FullPanel bg;
-    private com.s.swing.blur.Button button1;
     private javax.swing.JButton cmdClose;
+    private com.s.swing.blur.Button cmdGenerate;
     private javax.swing.JButton cmdMaximize;
     private javax.swing.JButton cmdMinimize;
     private javax.swing.JPanel panel;
