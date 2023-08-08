@@ -72,7 +72,7 @@ public class PanelLoginAndRegister extends javax.swing.JLayeredPane {
                 String Name, Email, Pass, query;
                 try {
                     Class.forName("com.mysql.cj.jdbc.Driver");
-                    Connection con = DriverManager.getConnection("jdbc:MySQL://localhost:3306/passgen", "root", "Divya2206@$");
+                    Connection con = DriverManager.getConnection("jdbc:MySQL://localhost:3306/db_name", "root", "password");//Inplace of db_name & password add your own db & pass
                     java.sql.Statement st = con.createStatement();
                     if ("".equals(txtUser.getText()) || "".equals(txtEmail.getText()) || "".equals(txtPass.getPassword().toString())) {
                         JOptionPane.showMessageDialog(new JFrame(), "Invalid credentials", "Error", JOptionPane.ERROR_MESSAGE);
@@ -135,7 +135,7 @@ public class PanelLoginAndRegister extends javax.swing.JLayeredPane {
                 int notFound = 0;
                 try {
                     Class.forName("com.mysql.cj.jdbc.Driver");
-                    Connection con = DriverManager.getConnection("jdbc:MySQL://localhost:3306/passgen", "root", "Divya2206@$");
+                    Connection con = DriverManager.getConnection("jdbc:MySQL://localhost:3306/db_name", "root", "password");//Inplace of db_name & password add your own db & pass
                     java.sql.Statement st = con.createStatement();
                     if ("".equals(txtEmail.getText()) || "".equals(txtPass.getPassword().toString())) {
                         JOptionPane.showMessageDialog(new JFrame(), "Full Name required", "Error", JOptionPane.ERROR_MESSAGE);
