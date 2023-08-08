@@ -11,22 +11,41 @@ Creating strong passwords is crucial for ensuring the security of online account
 ### Java
 
 ```java
-import java.security.SecureRandom;
+private static final String ALPHABET = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+private static final String SYMBOLS = "!@#$%^&*()_+-=[]{}|;:,.<>?";
+private static final String NUMBERS = "0123456789";
+private static final String EMAIL_REGEX = "/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\\.[a-zA-Z0-9-]+)*$/";
+private boolean validateEmail(String email) {
+        Pattern pattern = Pattern.compile(EMAIL_REGEX);
+        Matcher matcher = pattern.matcher(email);
+        return matcher.matches();
+    }
+private void validateAndProcessEmail() {
+        String userEmail = txtEmail.getText().trim(); // Assuming txtEmail is the JTextField for email input
 
-public class PasswordGenerator {
-    public static String generatePassword(int length) {
-        String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_-+=";
-        StringBuilder password = new StringBuilder(length);
-        SecureRandom random = new SecureRandom();
+        if (validateEmail(userEmail)) {
+            // Email is valid, you can perform further actions here
+            System.out.println("Email is valid: " + userEmail);
+        } else {
+            // Email is not valid
+            JOptionPane.showMessageDialog(new JFrame(), "Please provide valid email");
+        }
+    }
+
+    private String generateRandomPhrase(int length) {
+        StringBuilder phraseBuilder = new StringBuilder();
+
+        String allCharacters = ALPHABET + SYMBOLS + NUMBERS;
+        Random random = new Random();
 
         for (int i = 0; i < length; i++) {
-            int randomIndex = random.nextInt(characters.length());
-            password.append(characters.charAt(randomIndex));
+            int randomIndex = random.nextInt(allCharacters.length());
+            char randomChar = allCharacters.charAt(randomIndex);
+            phraseBuilder.append(randomChar);
         }
 
-        return password.toString();
+        return phraseBuilder.toString();
     }
-}
 ```
 # How to Use
 
@@ -41,13 +60,14 @@ public class PasswordGenerator {
 Here's an example of how to use the Java password generator:
 
 ```java
-public class Main {
-    public static void main(String[] args) {
-        int passwordLength = 16;
-        String generatedPassword = PasswordGenerator.generatePassword(passwordLength);
-        System.out.println(generatedPassword);
-    }
-}
+private void cmdGenerateActionPerformed(java.awt.event.ActionEvent evt) {                                            
+        String email = txtEmail.getText();
+        validateAndProcessEmail();
+            int phraseLength = 10; // You can change the desired length here
+            String randomPhrase = generateRandomPhrase(phraseLength);
+            txtAns.setText("Suggested Password: " + randomPhrase);
+        
+    } 
 ```
 # Contributing
 
