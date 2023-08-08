@@ -3,17 +3,57 @@ package com.s.main;
 import com.s.swing.ComponentResizer;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Image;
 import java.awt.Toolkit;
+import java.util.Random;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 public class HomeScreen extends javax.swing.JFrame {
-    
+
+    private static final String ALPHABET = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    private static final String SYMBOLS = "!@#$%^&*()_+-=[]{}|;:,.<>?";
+    private static final String NUMBERS = "0123456789";
+    private static final String EMAIL_REGEX = "/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\\.[a-zA-Z0-9-]+)*$/";
+
     public HomeScreen() {
         initComponents();
         init();
+    }
+
+    private boolean validateEmail(String email) {
+        Pattern pattern = Pattern.compile(EMAIL_REGEX);
+        Matcher matcher = pattern.matcher(email);
+        return matcher.matches();
+    }
+
+    private void validateAndProcessEmail() {
+        String userEmail = txtEmail.getText().trim(); // Assuming txtEmail is the JTextField for email input
+
+        if (validateEmail(userEmail)) {
+            // Email is valid, you can perform further actions here
+            System.out.println("Email is valid: " + userEmail);
+        } else {
+            // Email is not valid
+            JOptionPane.showMessageDialog(new JFrame(), "Please provide valid email");
+        }
+    }
+
+    private String generateRandomPhrase(int length) {
+        StringBuilder phraseBuilder = new StringBuilder();
+
+        String allCharacters = ALPHABET + SYMBOLS + NUMBERS;
+        Random random = new Random();
+
+        for (int i = 0; i < length; i++) {
+            int randomIndex = random.nextInt(allCharacters.length());
+            char randomChar = allCharacters.charAt(randomIndex);
+            phraseBuilder.append(randomChar);
+        }
+
+        return phraseBuilder.toString();
     }
 
     private void init() {
@@ -24,7 +64,7 @@ public class HomeScreen extends javax.swing.JFrame {
         com.setSnapSize(new Dimension(10, 10));
         setBackground(new Color(0, 0, 0, 0));
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -120,6 +160,11 @@ public class HomeScreen extends javax.swing.JFrame {
         button1.setForeground(new java.awt.Color(255, 255, 255));
         button1.setText("Generate");
         button1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        button1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button1ActionPerformed(evt);
+            }
+        });
 
         txtAns.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         txtAns.setForeground(new java.awt.Color(255, 255, 255));
@@ -231,6 +276,9 @@ public class HomeScreen extends javax.swing.JFrame {
             if (response == JOptionPane.YES_OPTION) {
                 // If the user clicks "Yes", close the frame.
                 this.dispose(); // This will close the current frame/dialog.
+                Main m = new Main();
+                m.setVisible(true);
+                int DISPOSE_ON_CLOSE1 = HomeScreen.DISPOSE_ON_CLOSE;
             }
             // If the user clicks "No" or closes the dialog, the method will simply return, and the frame remains open.
         }
@@ -239,10 +287,19 @@ public class HomeScreen extends javax.swing.JFrame {
     private void cmdMinimizeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdMinimizeActionPerformed
         setState(JFrame.ICONIFIED);
     }//GEN-LAST:event_cmdMinimizeActionPerformed
-    
+
+    private void button1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button1ActionPerformed
+        String email = txtEmail.getText();
+        validateAndProcessEmail();
+            int phraseLength = 10; // You can change the desired length here
+            String randomPhrase = generateRandomPhrase(phraseLength);
+            txtAns.setText("Suggested Password: " + randomPhrase);
+        
+    }//GEN-LAST:event_button1ActionPerformed
+
     private int pX;
     private int pY;
-    
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
